@@ -1,5 +1,11 @@
 ---
 language: go
-
 go:
-  - "1.12"
+  - "1.12.x"
+env:
+  global:
+    - GO111MODULE=on
+install:
+  - sudo apt-get update
+script:
+  - make all
