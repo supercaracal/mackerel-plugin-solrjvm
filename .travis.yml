@@ -7,6 +7,10 @@ env:
     - GO111MODULE=on
 install:
   - sudo apt-get update
-  - go get -u golang.org/x/lint/golint
+  - go get golang.org/x/lint/golint
+  - go get github.com/Songmu/goxz/cmd/goxz
+  - go get github.com/tcnksm/ghr
 script:
   - make all
+after_success:
+  - if [[ $TRAVIS_TAG =~ ^v[0-9].*$ ]]; then release.sh; fi
