@@ -169,13 +169,11 @@ func (sj SolrJVMPlugin) GraphDefinition() map[string]mp.Graphs {
 	}
 }
 
-// MetricKeyPrefix is implementation of Mackerel PluginWithPrefix interface
+// MetricKeyPrefix interface for mackerelplugin
 func (sj SolrJVMPlugin) MetricKeyPrefix() string {
 	return sj.Prefix
 }
 
-// @see https://mackerel.io/ja/docs/entry/advanced/go-mackerel-plugin
-// @see https://lucene.apache.org/solr/guide/8_1/metrics-reporting.html
 func main() {
 	optURL := flag.String("url", "http://127.0.0.1:8983", "Solr URL")
 	optTempfile := flag.String("tempfile", "", "Temp file name")
