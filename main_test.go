@@ -46,8 +46,10 @@ func TestFetchMetrics(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if actual["gc_count.young"] != 12 {
-		t.Fatalf("Expected: %d, Actual: %d", 12, actual["gc_count.young"])
+	var expected uint64
+	expected = 12
+	if actual["gc_count.young"] != expected {
+		t.Fatalf("Expected: %d, Actual: %d", expected, actual["gc_count.young"])
 	}
 }
 

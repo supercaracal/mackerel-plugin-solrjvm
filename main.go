@@ -19,31 +19,31 @@ type SolrJVMPlugin struct {
 type SolrMetricAPIResponse struct {
 	Metrics struct {
 		JVM struct {
-			GCG1OldGenerationCount                     int `json:"gc.G1-Old-Generation.count"`
-			GGG1OldGenerationTime                      int `json:"gc.G1-Old-Generation.time"`
-			GCG1YoungGenerationCount                   int `json:"gc.G1-Young-Generation.count"`
-			GCG1YoungGenerationTime                    int `json:"gc.G1-Young-Generation.time"`
-			MemoryTotalMax                             int `json:"memory.total.max"`
-			MemoryTotalUsed                            int `json:"memory.total.used"`
-			MemoryHeapUsed                             int `json:"memory.heap.used"`
-			MemoryNonHeapUsed                          int `json:"memory.non-heap.used"`
-			MemoryPoolsCodeHeapNonNmethodsUsed         int `json:"memory.pools.CodeHeap-'non-nmethods'.used"`
-			MemoryPoolsCodeHeapNonProfiledNmethodsUsed int `json:"memory.pools.CodeHeap-'non-profiled-nmethods'.used"`
-			MemoryPoolsCodeHeapProfiledNmethodsUsed    int `json:"memory.pools.CodeHeap-'profiled-nmethods'.used"`
-			MemoryPoolsCompressedClassSpaceUsed        int `json:"memory.pools.Compressed-Class-Space.used"`
-			MemoryPoolsG1EdenSpaceUsed                 int `json:"memory.pools.G1-Eden-Space.used"`
-			MemoryPoolsG1OldGenUsed                    int `json:"memory.pools.G1-Old-Gen.used"`
-			MemoryPoolsG1SurvivorSpaceUsed             int `json:"memory.pools.G1-Survivor-Space.used"`
-			MemoryPoolsMetaspaceUsed                   int `json:"memory.pools.Metaspace.used"`
-			ThreadsBlockedCount                        int `json:"threads.blocked.count"`
-			ThreadsCount                               int `json:"threads.count"`
-			ThreadsDaemonCount                         int `json:"threads.daemon.count"`
-			ThreadsDeadlockCount                       int `json:"threads.deadlock.count"`
-			ThreadsNewCount                            int `json:"threads.new.count"`
-			ThreadsRunnableCount                       int `json:"threads.runnable.count"`
-			ThreadsTerminatedCount                     int `json:"threads.terminated.count"`
-			ThreadsTimedWaitingCount                   int `json:"threads.timed_waiting.count"`
-			ThreadsWaitingCount                        int `json:"threads.waiting.count"`
+			GCG1OldGenerationCount                     uint64 `json:"gc.G1-Old-Generation.count"`
+			GGG1OldGenerationTime                      uint64 `json:"gc.G1-Old-Generation.time"`
+			GCG1YoungGenerationCount                   uint64 `json:"gc.G1-Young-Generation.count"`
+			GCG1YoungGenerationTime                    uint64 `json:"gc.G1-Young-Generation.time"`
+			MemoryTotalMax                             uint64 `json:"memory.total.max"`
+			MemoryTotalUsed                            uint64 `json:"memory.total.used"`
+			MemoryHeapUsed                             uint64 `json:"memory.heap.used"`
+			MemoryNonHeapUsed                          uint64 `json:"memory.non-heap.used"`
+			MemoryPoolsCodeHeapNonNmethodsUsed         uint64 `json:"memory.pools.CodeHeap-'non-nmethods'.used"`
+			MemoryPoolsCodeHeapNonProfiledNmethodsUsed uint64 `json:"memory.pools.CodeHeap-'non-profiled-nmethods'.used"`
+			MemoryPoolsCodeHeapProfiledNmethodsUsed    uint64 `json:"memory.pools.CodeHeap-'profiled-nmethods'.used"`
+			MemoryPoolsCompressedClassSpaceUsed        uint64 `json:"memory.pools.Compressed-Class-Space.used"`
+			MemoryPoolsG1EdenSpaceUsed                 uint64 `json:"memory.pools.G1-Eden-Space.used"`
+			MemoryPoolsG1OldGenUsed                    uint64 `json:"memory.pools.G1-Old-Gen.used"`
+			MemoryPoolsG1SurvivorSpaceUsed             uint64 `json:"memory.pools.G1-Survivor-Space.used"`
+			MemoryPoolsMetaspaceUsed                   uint64 `json:"memory.pools.Metaspace.used"`
+			ThreadsBlockedCount                        uint64 `json:"threads.blocked.count"`
+			ThreadsCount                               uint64 `json:"threads.count"`
+			ThreadsDaemonCount                         uint64 `json:"threads.daemon.count"`
+			ThreadsDeadlockCount                       uint64 `json:"threads.deadlock.count"`
+			ThreadsNewCount                            uint64 `json:"threads.new.count"`
+			ThreadsRunnableCount                       uint64 `json:"threads.runnable.count"`
+			ThreadsTerminatedCount                     uint64 `json:"threads.terminated.count"`
+			ThreadsTimedWaitingCount                   uint64 `json:"threads.timed_waiting.count"`
+			ThreadsWaitingCount                        uint64 `json:"threads.waiting.count"`
 		} `json:"solr.jvm"`
 	} `json:"metrics"`
 }
@@ -115,49 +115,49 @@ func (sj SolrJVMPlugin) GraphDefinition() map[string]mp.Graphs {
 			Label: "JVM GC Count",
 			Unit:  "integer",
 			Metrics: []mp.Metrics{
-				{Name: "old", Label: "Old"},
-				{Name: "young", Label: "Young"},
+				{Name: "old", Label: "Old", AbsoluteName: true},
+				{Name: "young", Label: "Young", AbsoluteName: true},
 			},
 		},
 		"gc_time": {
 			Label: "JVM GC Time",
 			Unit:  "integer",
 			Metrics: []mp.Metrics{
-				{Name: "old", Label: "Old"},
-				{Name: "young", Label: "Young"},
+				{Name: "old", Label: "Old", AbsoluteName: true},
+				{Name: "young", Label: "Young", AbsoluteName: true},
 			},
 		},
 		"memory_used": {
 			Label: "JVM Memory Used",
 			Unit:  "bytes",
 			Metrics: []mp.Metrics{
-				{Name: "total_max", Label: "Total Max"},
-				{Name: "total", Label: "Total"},
-				{Name: "heap", Label: "Heap", Stacked: true},
-				{Name: "non_heap", Label: "Non Heap", Stacked: true},
-				{Name: "code_heap_non_n_methods", Label: "Code Heap Non N Methods", Stacked: true},
-				{Name: "code_heap_non_profiled_n_methods", Label: "Code Heap Non Profiled N Methods", Stacked: true},
-				{Name: "code_heap_profiled_n_methods", Label: "Code Heap Profiled N Methods", Stacked: true},
-				{Name: "compressed_class", Label: "Compressed Class", Stacked: true},
-				{Name: "eden", Label: "Eden", Stacked: true},
-				{Name: "old", Label: "Old", Stacked: true},
-				{Name: "survivor", Label: "Survivor", Stacked: true},
-				{Name: "metaspace", Label: "Metaspace", Stacked: true},
+				{Name: "total_max", Label: "Total Max", AbsoluteName: true},
+				{Name: "total", Label: "Total", AbsoluteName: true},
+				{Name: "heap", Label: "Heap", AbsoluteName: true, Stacked: true},
+				{Name: "non_heap", Label: "Non Heap", AbsoluteName: true, Stacked: true},
+				{Name: "code_heap_non_n_methods", Label: "Code Heap Non N Methods", AbsoluteName: true, Stacked: true},
+				{Name: "code_heap_non_profiled_n_methods", Label: "Code Heap Non Profiled N Methods", AbsoluteName: true, Stacked: true},
+				{Name: "code_heap_profiled_n_methods", Label: "Code Heap Profiled N Methods", AbsoluteName: true, Stacked: true},
+				{Name: "compressed_class", Label: "Compressed Class", AbsoluteName: true, Stacked: true},
+				{Name: "eden", Label: "Eden", AbsoluteName: true, Stacked: true},
+				{Name: "old", Label: "Old", AbsoluteName: true, Stacked: true},
+				{Name: "survivor", Label: "Survivor", AbsoluteName: true, Stacked: true},
+				{Name: "metaspace", Label: "Metaspace", AbsoluteName: true, Stacked: true},
 			},
 		},
 		"thread_count": {
 			Label: "JVM Thread Count",
 			Unit:  "integer",
 			Metrics: []mp.Metrics{
-				{Name: "blocked", Label: "Blocked"},
-				{Name: "all", Label: "All"},
-				{Name: "daemon", Label: "Daemon"},
-				{Name: "deadlock", Label: "Deadlock"},
-				{Name: "new", Label: "New"},
-				{Name: "runnable", Label: "Runnable"},
-				{Name: "terminated", Label: "Terminated"},
-				{Name: "timedWaiting", Label: "TimedWaiting"},
-				{Name: "waiting", Label: "Waiting"},
+				{Name: "blocked", Label: "Blocked", AbsoluteName: true},
+				{Name: "all", Label: "All", AbsoluteName: true},
+				{Name: "daemon", Label: "Daemon", AbsoluteName: true},
+				{Name: "deadlock", Label: "Deadlock", AbsoluteName: true},
+				{Name: "new", Label: "New", AbsoluteName: true},
+				{Name: "runnable", Label: "Runnable", AbsoluteName: true},
+				{Name: "terminated", Label: "Terminated", AbsoluteName: true},
+				{Name: "timedWaiting", Label: "TimedWaiting", AbsoluteName: true},
+				{Name: "waiting", Label: "Waiting", AbsoluteName: true},
 			},
 		},
 	}
