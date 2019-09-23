@@ -1,11 +1,12 @@
 ---
 language: go
 go:
-  - "1.12.x"
+  - 1.12.x
 env:
   global:
     - GO111MODULE=on
 install:
   - sudo apt-get update
+  - go get -u golang.org/x/lint/golint
 script:
   - make all
