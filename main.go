@@ -172,7 +172,7 @@ func (sj SolrJVMPlugin) MetricKeyPrefix() string {
 // @see https://lucene.apache.org/solr/guide/8_1/metrics-reporting.html
 func main() {
 	optURL := flag.String("url", "http://127.0.0.1:8983", "Solr URL")
-	optTempfile := flag.String("tempfile", "mackerel-plugin-solrjvm", "Temp file name")
+	optTempfile := flag.String("tempfile", "", "Temp file name")
 	flag.Parse()
 
 	sj := SolrJVMPlugin{URL: *optURL, Prefix: "solrjvm"}
