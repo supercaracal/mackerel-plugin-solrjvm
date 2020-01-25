@@ -29,6 +29,7 @@ jobs:
         run: |
           wget https://github.com/Songmu/${PKG_NAME}/releases/download/${PKG_VER}/${PKG_NAME}_${PKG_VER}_${GOOS}_${GOARCH}.tar.gz
           tar zxf ${PKG_NAME}_${PKG_VER}_${GOOS}_${GOARCH}.tar.gz
+          mkdir -p  $(go env GOPATH)/bin
           mv ${PKG_NAME}_${PKG_VER}_${GOOS}_${GOARCH}/${PKG_NAME} $(go env GOPATH)/bin/
         env:
           PKG_NAME: goxz
@@ -40,6 +41,7 @@ jobs:
         run: |
           wget https://github.com/tcnksm/${PKG_NAME}/releases/download/${PKG_VER}/${PKG_NAME}_${PKG_VER}_${GOOS}_${GOARCH}.tar.gz
           tar zxf ${PKG_NAME}_${PKG_VER}_${GOOS}_${GOARCH}.tar.gz
+          mkdir -p  $(go env GOPATH)/bin
           mv ${PKG_NAME}_${PKG_VER}_${GOOS}_${GOARCH}/${PKG_NAME} $(go env GOPATH)/bin/
         env:
           PKG_NAME: ghr
