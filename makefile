@@ -24,6 +24,6 @@ cross-compile:
 	goxz -d dist/${latest_tag} -z -os windows,darwin,linux -arch amd64,386
 
 upload-assets:
-	ghr -u ${owner} -r ${app_name} ${latest_tag} dist/${latest_tag}
+	ghr -u ${owner_id} -r ${app_name} ${latest_tag} dist/${latest_tag}
 
 .PHONY: all build test lint clean cross-compile upload-assets
