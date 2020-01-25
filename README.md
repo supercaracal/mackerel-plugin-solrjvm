@@ -1,4 +1,4 @@
-mackerel-plugin-solrjvm [![Build Status](https://travis-ci.org/supercaracal/mackerel-plugin-solrjvm.svg?branch=master)](https://travis-ci.org/supercaracal/mackerel-plugin-solrjvm)
+mackerel-plugin-solrjvm ![](https://github.com/supercaracal/mackerel-plugin-solrjvm/workflows/CI/badge.svg) ![](https://github.com/supercaracal/mackerel-plugin-solrjvm/workflows/CD/badge.svg)
 =====================
 
 Apache Solr JVM metrics plugin for mackerel.io agent.
